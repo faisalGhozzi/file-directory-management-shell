@@ -1,0 +1,11 @@
+\t -h \t Afficher le fichier help detaillé a partir d'un fichier text
+    \t -g \t afficher un menu textuel et gerer les fonctionnalité de façon  graphique
+    \t -v \t afficher le nom des auteurs et version du code
+    \t -M \t Afficher le menu textuel
+    \t -T \t Afficher file qui permet de tracer le non de dossier ainsi que les noms de fichiers
+    \t -t \t Afficher directory qui permet de tracer le non de dossier ainsi que les noms des dossiers
+    \t -n \t afficher la fonction NB qui permet de tracer le nombre des dossier et des fichiers
+    \t -N \t AFFICHER la fonction directory user
+    \t -d \t Afficher la fonction acess 
+    \t -m \t Afficher la fonction datemodif
+    \t -s \t afficher la fonction stat qui permet d'afficher les statistiques
