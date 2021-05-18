@@ -17,7 +17,7 @@ Afficher_plot()
 
 nb()
 {
-    ls -l $1 | wc -l > $1_journal.txt
+    ls -l /home/$USER/$1 | wc -l > $1_journal.txt
 }
 
 Afficher_version()
@@ -27,29 +27,29 @@ Afficher_version()
 
 Afficher_fichier()
 {
-    ls -p $1 | grep -v / > $1_journal.txt
-    sed -i "1i{$1}" $1_journal.txt
+    ls -p /home/$USER/$1 | grep -v / > ~/$1_journal.txt
+    sed -i "1i{$1}" ~/$1_journal.txt
 }
 
 Afficher_dossier()
 {
-    ls -d $1*/ | awk -F "/" '{print $4}' > $1_journal.txt
-    sed -i "li{$1}" $1_journal.txt
+    ls -d /home/$USER/${1}*/ | awk -F "/" '{print $4}' > ~/$1_journal.txt
+    sed -i "1i{$1}" ~/$1_journal.txt
 }
 
 Chercher_directeryUser()
 {
-   stat -c "%U" $1 >> $1_journal.txt
+   stat -c "%U" /home/$USER/$1 >> ~/$1_journal.txt
 }
 
  Afficher_fonction_acess()
 {
-   stat -c %x $1 >> $1_journal.txt
+   stat -c %x /home/$USER/$1 >> ~/$1_journal.txt
 }
 
  Afficher_fonction_modification_de_date()
 {
-   stat -c %y $1 >> $1_journal.txt
+   stat -c %y /home/$USER/$1 >> ~/$1_journal.txt
 }
 
 Menu_graphique(){
@@ -92,7 +92,7 @@ Menu_graphique(){
                 fi
                 ;;
             2)
-                res=$(dialog --stdout --dselect "$HOME/" 50 50)
+                res=$(dialog --stdout --dselect "/home/${USER}/" 50 50)
                 Afficher_fichier $res
                 dialog --title "Success" \
                 --no-collapse \
@@ -102,7 +102,7 @@ Menu_graphique(){
                 fi
                 ;;
             3)
-                res=$(dialog --stdout --dselect "$HOME/" 50 50)
+                res=$(dialog --stdout --dselect "/home/${USER}/" 50 50)
                 Afficher_dossier $res
                 dialog --title "Success" \
                 --no-collapse \
@@ -112,7 +112,7 @@ Menu_graphique(){
                 fi
                 ;;
             4)
-                res=$(dialog --stdout --dselect "$HOME/" 50 50)
+                res=$(dialog --stdout --dselect "/home/${USER}/" 50 50)
                 nb $res
                 dialog --title "Success" \
                 --no-collapse \
@@ -121,7 +121,7 @@ Menu_graphique(){
                 Menu_graphique
                 fi
                 ;;
-            5)  res=$(dialog --stdout --dselect "$HOME/" 50 50)
+            5)  res=$(dialog --stdout --dselect "/home/${USER}/" 50 50)
                 Chercher_directeryUser $res
                 dialog --title "Success" \
                 --no-collapse \
@@ -130,7 +130,7 @@ Menu_graphique(){
                 Menu_graphique
                 fi
                 ;;
-            6)  res=$(dialog --stdout --dselect "$HOME/" 50 50)
+            6)  res=$(dialog --stdout --dselect "/home/${USER}/" 50 50)
                 Afficher_fonction_acess $res
                 dialog --title "Success" \
                 --no-collapse \
@@ -139,7 +139,7 @@ Menu_graphique(){
                 Menu_graphique
                 fi
                 ;;
-            7)  res=$(dialog --stdout --dselect "$HOME/" 50 50)
+            7)  res=$(dialog --stdout --dselect "/home/${USER}/" 50 50)
                 Afficher_fonction_modification_de_date $res
                 dialog --title "Success" \
                 --no-collapse \
@@ -148,7 +148,7 @@ Menu_graphique(){
                 Menu_graphique
                 fi
                 ;;
-            8)  res=$(dialog --stdout --dselect "$HOME/" 50 50)
+            8)  res=$(dialog --stdout --dselect "/home/${USER}/" 50 50)
                 Afficher_plot $res
                 if [[ $? -eq $DIALOG_OK ]]; then
                 Menu_graphique
@@ -194,17 +194,17 @@ Menu_textuel()
         ;;
         3) Afficher_version
         ;;
-        4) echo "Donner le lien vers le dossier"; read n; Afficher_fichier $n
+        4) echo "Donner le lien vers le dossier"; read n; Afficher_fichier $n; echo "Trouvez le fichier sous ~/$n.txt"
         ;;
-        5) echo "Donner le lien vers le dossier"; read n; Afficher_dossier $n
+        5) echo "Donner le lien vers le dossier"; read n; Afficher_dossier $n; echo "Trouvez le fichier sous ~/$n.txt"
         ;;
-        6) echo "Donner le lien vers le dossier";  read n; nb $n
+        6) echo "Donner le lien vers le dossier";  read n; nb $n; echo "Trouvez le fichier sous ~/$n.txt"
         ;;
-        7) echo "Donner le lien vers le dossier"; read n; Chercher_directeryUser $n
+        7) echo "Donner le lien vers le dossier"; read n; Chercher_directeryUser $n; echo "Trouvez le fichier sous ~/$n.txt"
         ;;
-        8) echo "Donner le lien vers le dossier"; read n; Afficher_fonction_acess $n
+        8) echo "Donner le lien vers le dossier"; read n; Afficher_fonction_acess $n; echo "Trouvez le fichier sous ~/$n.txt"
         ;;
-        9) echo "Donner le lien vers le dossier"; read n; Afficher_fonction_modification_de_date $n
+        9) echo "Donner le lien vers le dossier"; read n; Afficher_fonction_modification_de_date $n; echo "Trouvez le fichier sous ~/$n.txt"
         ;;
         10) echo "Donner le lien vers le dossier"; read n; Afficher_plot $n
         ;;
