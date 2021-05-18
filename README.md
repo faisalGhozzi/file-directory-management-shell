@@ -1,1 +1,1 @@
-# scripting-14
+sudo apt-get install dialog
